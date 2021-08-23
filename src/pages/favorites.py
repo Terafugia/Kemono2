@@ -121,7 +121,7 @@ def delete_favorite_artist(service, artist_id):
     account = load_account()
     if account is None:
         return redirect(url_for('account.get_login'))
-    # remove_favorite_artist(account['id'], service, artist_id)
+    remove_favorite_artist(account['id'], service, artist_id)
     return '', 200
 
 def sort_and_filter_favorites(favorites, o, field, asc):
