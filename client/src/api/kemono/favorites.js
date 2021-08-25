@@ -29,21 +29,21 @@ async function retrieveFavoriteArtists() {
      */
     const favs = await response.text();
     return favs;
-    
+
   } catch (error) {
-    alert(error);
+    console.error(error);
   }
 
 }
 
 /**
- * @param {string} service 
- * @param {string} userID 
+ * @param {string} service
+ * @param {string} userID
  */
 async function favoriteArtist(service, userID) {
   try {
     const response = await kemonoFetch(
-      `/favorites/artist/${service}/${userID}`, 
+      `/favorites/artist/${service}/${userID}`,
       { method: "POST" }
     );
 
@@ -51,22 +51,22 @@ async function favoriteArtist(service, userID) {
       alert(new KemonoError(3));
       return false;
     }
-    
+
     return true;
 
   } catch (error) {
-    alert(error);
+    console.error(error);
   }
 }
 
 /**
- * @param {string} service 
- * @param {string} userID 
+ * @param {string} service
+ * @param {string} userID
  */
 async function unfavoriteArtist(service, userID) {
   try {
     const response = await kemonoFetch(
-      `/favorites/artist/${service}/${userID}`, 
+      `/favorites/artist/${service}/${userID}`,
       { method: "DELETE" }
     );
 
@@ -74,11 +74,11 @@ async function unfavoriteArtist(service, userID) {
       alert(new KemonoError(4));
       return false;
     }
-    
+
     return true;
 
   } catch (error) {
-    alert(error);
+    console.error(error);
   }
 }
 
@@ -99,16 +99,16 @@ async function retrieveFavoritePosts() {
      */
     const favs = await response.text();
     return favs;
-    
+
   } catch (error) {
-    alert(error);
+    console.error(error);
   }
 }
 
 /**
- * @param {string} service 
- * @param {string} user 
- * @param {string} post_id 
+ * @param {string} service
+ * @param {string} user
+ * @param {string} post_id
  */
 async function favoritePost(service, user, post_id) {
   try {
@@ -125,19 +125,19 @@ async function favoritePost(service, user, post_id) {
     return true;
 
   } catch (error) {
-    alert(error);
+    console.error(error);
   }
 }
 
 /**
- * @param {string} service 
- * @param {string} user 
- * @param {string} post_id 
+ * @param {string} service
+ * @param {string} user
+ * @param {string} post_id
  */
 async function unfavoritePost(service, user, post_id) {
   try {
     const response = await kemonoFetch(
-      `/favorites/post/${service}/${user}/${post_id}`, 
+      `/favorites/post/${service}/${user}/${post_id}`,
       { method: "DELETE" }
     );
 
@@ -149,6 +149,6 @@ async function unfavoritePost(service, user, post_id) {
     return true;
 
   } catch (error) {
-    alert(error);
+    console.error(error);
   }
 }
