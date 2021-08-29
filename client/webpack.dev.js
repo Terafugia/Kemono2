@@ -6,8 +6,6 @@ const { merge } = require("webpack-merge");
 const baseConfig = require("./webpack.config");
 const { kemonoSite } = require("./configs/vars");
 
-const projectPath = path.resolve(__dirname, "src");
-
 /**
  * @type {import("webpack-dev-server").Configuration}
  */
@@ -33,9 +31,6 @@ const webpackConfigDev = {
   mode: "development",
   devtool: "eval-source-map",
   devServer: devServer,
-  entry: {
-    'dev-only': path.join(projectPath, "js", "dev-only.js")
-  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "static/bundle/css/[name].css",

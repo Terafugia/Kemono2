@@ -1,4 +1,5 @@
 interface KemonoAPI {
+  errors: Map<string, string>,
   favorites: KemonoAPI.Favorites,
   posts: KemonoAPI.Posts
   api: KemonoAPI.API
@@ -19,7 +20,6 @@ namespace KemonoAPI {
     embed: {}
     file: {}
     shared_file: boolean
-    faved_seq?: number
   }
 
   interface User {
@@ -28,7 +28,6 @@ namespace KemonoAPI {
     service: string
     indexed: string
     updated: string
-    faved_seq?: number
   }
   
   interface Favorites {
@@ -42,12 +41,11 @@ namespace KemonoAPI {
 
   namespace Favorites {
     interface User extends KemonoAPI.User {
+      faved_seq: number
     }
 
-    interface Post {
-      id: string
-      service: string
-      user: string
+    interface Post extends KemonoAPI.Post {
+      faved_seq: number
     }
   }
 

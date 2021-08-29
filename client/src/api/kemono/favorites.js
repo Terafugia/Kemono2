@@ -95,22 +95,11 @@ async function retrieveFavoritePosts() {
     }
 
     /**
-     * @type {KemonoAPI.Post[]}
+     * @type {string}
      */
-    const favs = await response.json();
-    /**
-     * @type {KemonoAPI.Favorites.Post[]}
-     */
-    const transformedFavs = favs.map((post) => {
-      return {
-        id: post.id,
-        service:post.service,
-        user: post.user
-      }
-    });
+    const favs = await response.text();
+    return favs;
 
-    return JSON.stringify(transformedFavs);
-    
   } catch (error) {
     console.error(error);
   }
