@@ -29,9 +29,8 @@ const pages = new Map([
 
 /**
  * Initialises the scripts on the page.
- * @param {boolean} isLoggedIn
  */
-export function initSections(isLoggedIn) {
+export function initSections() {
   const header = document.querySelector(".global-header");
   const main = document.querySelector("main");
   /**
@@ -43,8 +42,8 @@ export function initSections(isLoggedIn) {
    */
   const sections = main.querySelectorAll("main > .site-section");
   
-  initShell(header, isLoggedIn);
   initComponentFactory(footer);
+  initShell(header);
   sections.forEach(section => {
     const sectionName = /site-section--([a-z\-]+)/i.exec(section.className)[1];
 

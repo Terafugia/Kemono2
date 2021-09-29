@@ -1,0 +1,38 @@
+{% macro navigation(items, id=none, class_name=none) %}
+  <nav
+    {% if id %}
+      id="{{ id }}"
+    {% endif %}
+    class="navigation {{ class_name if class_name }}"
+  >
+    {% if not caller %}
+      {{ nav_list(items) }}
+    {% else %}
+      {{ caller() }}
+    {% endif %}
+  </nav>
+{% endmacro %}
+
+{% macro nav_list(items, class_name=none) %}
+  <ul class="navigation__list {{ class_name if class_name }}">
+    {% if not caller %}
+      {% for item in items %}
+        {% if item.predicate %}
+          {{ nav_item(item.link, item.text) }}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {{ caller() }}
+    {% endif %}
+  </ul>
+{% endmacro %}
+
+{% macro nav_item(link, text=link, class_name=none) %}
+  <li class="navigation__item {{ class_name if class_name }}">
+    {% if not caller %}
+      <a class="navigation__link" href="{{ link }}">{{ text }}</a>
+    {% else %}
+      {{ caller() }}
+    {% endif %}
+  </li>
+{% endmacro %}

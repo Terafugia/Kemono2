@@ -27,8 +27,9 @@ $button-min-height: 44px;
   --colour0-secondary: hsl(0, 0%, 70%);
   --colour0-tertirary: hsl(0, 0%, 45%);
   --colour1-primary: hsl(210, 6%, 12%);
-  --colour1-primary-transparent: hsla(210, 6%, 12%, 75%);
+  --colour1-primary-transparent: hsla(210, 6%, 12%, 0.75);
   --colour1-secondary: hsl(220, 7%, 25%);
+  --colour1-secondary-transparent: hsla(220, 7%, 25%, 0.5);
   --colour1-tertiary: hsl(210, 15%, 5%);
 
   /* Buttons */
