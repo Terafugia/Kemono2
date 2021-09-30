@@ -57,10 +57,6 @@ if (is_development):
     app.register_blueprint(dev_only)
 
 app.config.from_pyfile('flask.cfg')
-app.jinja_options = dict(
-    trim_blocks=True, 
-    lstrip_blocks=True
-)
 app.jinja_env.globals.update(is_logged_in=is_logged_in)
 app.jinja_env.globals.update(render_page_data=render_page_data)
 app.jinja_env.filters['regex_match'] = lambda val, rgx: re.search(rgx, val)

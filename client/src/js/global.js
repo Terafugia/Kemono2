@@ -2,13 +2,14 @@ import "./global.scss";
 import { initSections } from "@wp/pages";
 import { initFavorites } from "@wp/js/favorites";
 import { fixImageLinks } from "@wp/utils";
-import { isLoggedIn } from "@wp/js/account.js";
+
+const isLoggedIn = localStorage.getItem('logged_in') === "yes";
 
 if (isLoggedIn) {
   initFavorites()
 }
 fixImageLinks(document.images);
-initSections();
+initSections(isLoggedIn);
 
 // function isStorageAvailable() {
 //   try {

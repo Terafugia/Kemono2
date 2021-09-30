@@ -1,27 +1,8 @@
 {% from 'components/loading_icon.html' import loading_icon %}
 {% from 'components/timestamp.html' import timestamp %}
 {% from 'components/tooltip.html' import tooltip %}
-{% from 'components/links.html' import fancy_link, kemono_link, link_button %}
-{% from 'components/tooltip.html' import register_message %}
-{% from 'components/navigation.html' import navigation, nav_list, nav_item %}
-{% from 'components/buttons.html' import button %}
-
-{% macro global_nav_item(link, text=link) %}
-  {{ nav_item(
-    link=link,
-    text=text,
-    class_name="global-nav__item"
-  ) }}
-{% endmacro %}
-
-{% macro global_nav_link(link, text=link) %}
-  {{ link_button(
-    link,
-    text,
-    is_noop=false,
-    class_name="global-nav__link"
-  ) }}
-{% endmacro %}
+{% from 'components/links.html' import fancy_link %}
+{% from 'components/tooltip.html' import register_message%}
 
 <!DOCTYPE html>
 <html prefix="og: https://ogp.me/ns#">
@@ -104,89 +85,29 @@
   </head>
   <body>
     <header class="global-header">
-      {% block header %}
-        {% call navigation(id="global-nav", class_name="global-nav") %}
-          <div class="global-nav__home">
-            {{ global_nav_link(
-              '/',
-              'Home',
-            )}}
+      <ul class="header">
+        <li><a href="/">[Home]</a></li>
+        <li><a href="/artists">[Artists]</a></li>
+        <li><a href="/artists/updated">[Recently Updated Artists]</a></li>
+        <li><a href="/posts">[Recent Posts]</a></li>
+        <li><a href="/dms">[Recent DMs]</a></li>
+        <li><a href="/importer">[Import]</a></li>
+        <div id="account-buttons" style="display: inline-block;"></div>
+        <li><a href="/support" class="aux-link--support">[Donate]</a></li>
+        <li><a href="https://chan.kemono.party/" target="_blank" class="aux-link--board">[Partychan]</a></li>
+        <li><a href="https://t.me/kemonowelcome" target="_blank" class="aux-link--telegram">[Telegram]</a></li>
+        <li><a href="https://theporndude.com/" target="_blank" rel="nofollow" class="aux-link--tpd">[ThePornDude]</a></li>
+      </ul>
+      {% include 'components/subheader.html' %}
+      {% include 'components/flash_messages.html' %}
+      <a href="/support" class="jumbo-link">
+        <div class="jumbo shill-jumbo">
+          <div class="shill-container">
+            <div class="shill-heart"></div>
+            <span>Consider donating to help improve our infrastructure and avoid dependence on ad revenue!</span>
           </div>
-
-          <div class="global-nav__links">
-            <div id="global-nav__site" class="global-nav__site">
-              {% call nav_list(class_name="global-nav__list") %}
-                {% call nav_item(class_name="global-nav__item") %}
-                  {{ button('Artists', class_name="global-nav__button") }}
-                  {% call nav_list(class_name="global-nav__list") %}
-                    {{ global_nav_item('/artists', 'Artist List') }}
-                    {{ global_nav_item('/artists/updated', 'Recently Updated Artists') }}
-                    {{ global_nav_item('/artists/random', 'Random Artist') }}
-                  {% endcall %}
-                {% endcall %}
-
-                {% call nav_item(class_name="global-nav__item") %}
-                  {{ button('Posts', class_name="global-nav__button") }}
-                  {% call nav_list(class_name="global-nav__list") %}
-                    {{ global_nav_item('/posts', 'Recent Posts') }}
-                  {% endcall %}
-                {% endcall %}
-
-                {% call nav_item(class_name="global-nav__item") %}
-                  {{ button('DMs', class_name="global-nav__button") }}
-                  {% call nav_list(class_name="global-nav__list") %}
-                    {{ global_nav_item('/dms', 'Recent DMs') }}
-                  {% endcall %}
-                {% endcall %}
-
-                {# {% call nav_item(class_name="global-nav__item") %}
-                  {{ button('Requests', class_name="global-nav__button") }}
-                  {% call nav_list(class_name="global-nav__list") %}
-                    {{ global_nav_item('/requests', 'Request List') }}
-                    {{ global_nav_item('/requests/new', 'Post New Request') }}
-                  {% endcall %}
-                {% endcall %} #}
-
-                {% call nav_item(class_name="global-nav__item") %}
-                  {{ button('Import', class_name="global-nav__button") }}
-                  {% call nav_list(class_name="global-nav__list") %}
-                    {{ global_nav_item('/importer', 'Import') }}
-                  {% endcall %}
-                {% endcall %}
-              {% endcall %}
-              {{ button('Navigation', class_name="global-nav__switch") }}
-            </div>
-            
-            {# <div class="global-nav__extra">
-              {% call nav_list(class_name="global-nav__list") %}
-                {% call nav_item() %}
-                  {{ link_button(
-                    "/extra",
-                    "Example",
-                    class_name="global-nav__link"
-                  ) }}
-                {% endcall %}
-              {% endcall %}
-            </div> #}
-          </div>
-          
-          <div class="global-nav__item global-nav__item--account">
-            {{ button('Account', class_name="global-nav__button") }}
-            {% call nav_list(class_name="global-nav__list") %}
-            {% endcall %}
-          </div>
-          
-        {% endcall %}
-        {% include 'components/flash_messages.html' %}
-        <a href="/support" class="jumbo-link">
-          <div class="jumbo shill-jumbo">
-            <div class="shill-container">
-              <div class="shill-heart"></div>
-              <span>Consider donating to help improve our infrastructure and avoid dependence on ad revenue!</span>
-            </div>
-          </div>
-        </a>
-      {% endblock header %}
+        </div>
+      </a>
     </header>
 
     <main class="main" id="main">
@@ -205,7 +126,6 @@
         {{ register_message("") }}
         {{ timestamp("") }}
         {{ loading_icon() }}
-        {{ global_nav_item("") }}
         {% block components %}
         {% endblock components %}
       </div>

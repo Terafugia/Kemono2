@@ -2,10 +2,10 @@
 
 ## Setup
 ```sh
-git clone --recurse-submodules https://github.com/OpenYiff/Kemono2.git kemono-2
+git clone https://github.com/OpenYiff/Kemono2.git kemono-2
 cd kemono-2
 cp .env.example .env # open .env and configure
-cp flask.cfg.example flask.cfg # open flask.cfg and set 'SECRET_KEY' value
+cp flask.cfg.example flask.cfg # open flask.cfg and configure
 ```
 ## Docker
 ```sh
@@ -57,7 +57,7 @@ Open `http://localhost:8000/` in the browser.
 ## Manual
 TODO: write installation and setup instructions
 
-This assumes you have Python 3.8, Node 12+ and a running PostgreSQL server.
+This assumes you have Python 3, Node 12+ installed and a running PostgreSQL server.
 ```sh
 # make sure your database is initialized
 # cd to kemono directory
@@ -100,16 +100,3 @@ Assuming the running setup:
     ```sh
     docker exec kemono-redis redis-cli FLUSHALL
     ```
-### __How do I git modules?__
-Assuming you haven't cloned the repo recursively for whatever reason:
-1. Initiate the submodules
-    ```sh
-    git submodule init
-    git submodule update --init --recursive
-    ```
-2. Switch to archiver folder and add your fork to the remotes list:
-    ```sh
-    cd archiver
-    git remote add <remote_name> <your_fork_link>
-    ```
-3. Now you can interact with Kitsune repo the same way you do as if it was outside of project folder.
