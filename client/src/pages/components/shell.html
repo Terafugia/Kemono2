@@ -1,8 +1,11 @@
+{# TODO: figure out nested macro calls #}
+{% import 'components/navigation/global.html' as global %}
 {% from 'components/loading_icon.html' import loading_icon %}
 {% from 'components/timestamp.html' import timestamp %}
 {% from 'components/tooltip.html' import tooltip %}
-{% from 'components/links.html' import fancy_link %}
-{% from 'components/tooltip.html' import register_message%}
+{% from 'components/links.html' import fancy_link, kemono_link, link_button %}
+{% from 'components/tooltip.html' import register_message %}
+{% from 'components/buttons.html' import button %}
 
 <!DOCTYPE html>
 <html prefix="og: https://ogp.me/ns#">
@@ -30,7 +33,7 @@
       </title>
     {% endblock title %}
     <link rel="shortcut icon" href="/static/favicon.ico">
-    
+
     {% block meta %}
       {% if props.service %}
         <meta name="service" content="{{ props.service }}">
@@ -106,13 +109,28 @@
         <li><a href="/posts">[Recent Posts]</a></li>
         <li><a href="/dms">[Recent DMs]</a></li>
         <li><a href="/importer">[Import]</a></li>
-        <div id="account-buttons" style="display: inline-block;"></div>
+        <div id="account-buttons" style="display: inline-block;">
+          {% if g.new_notifications_count and request.path != '/account/notifications' %}
+            <li><a href="/account/notifications">New Notifications</a></li>
+          {% endif %}
+        </div>
         <li><a href="/support" class="aux-link--support">[Donate]</a></li>
         <li><a href="https://chan.kemono.party/" target="_blank" class="aux-link--board">[Partychan]</a></li>
         <li><a href="https://t.me/kemonowelcome" target="_blank" class="aux-link--telegram">[Telegram]</a></li>
         <li><a href="https://theporndude.com/" target="_blank" rel="nofollow" class="aux-link--tpd">[ThePornDude]</a></li>
       </ul>
-      {% include 'components/subheader.html' %}
+      {% if props.currentPage == 'artists' %}
+        <ul class="subheader">
+          <li><a href="/artists">[Artist List]</a></li>
+          <li><a href="/artists/random">[Random Artist]</a></li>
+        </ul>
+      {% endif %}
+      {% if props.currentPage == 'requests' %}
+        <ul class="subheader">
+          <li><a href="/requests">[Request List]</a></li>
+          <li><a href="/requests/new">[Post New Request]</a></li>
+        </ul>
+      {% endif %}
       {% include 'components/flash_messages.html' %}
       <a href="/support" class="jumbo-link">
         <div class="jumbo shill-jumbo">
@@ -132,8 +150,8 @@
     <footer class="global-footer">
       {% include 'components/footer.html' %}
       <div
-        id="component-container" 
-        class="component-container" 
+        id="component-container"
+        class="component-container"
         hidden
       >
         {{ fancy_link("") }}
@@ -144,6 +162,8 @@
         {% endblock components %}
       </div>
     </footer>
+    {# <div class="global-overlay">
+    </div> #}
     {% call tooltip() %}
       <p class="tooltip__message">
       </p>

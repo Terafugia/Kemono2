@@ -1,0 +1,57 @@
+{% extends 'components/shell.html' %}
+
+{% from 'components/timestamp.html' import timestamp %}
+{% from 'components/links.html' import kemono_link %}
+
+{% set role_links = {
+  "consumer": "/account",
+  "moderator": "/account/moderator",
+  "administrator": "/account/administrator"
+} %}
+
+{% block title %}
+  <title>{{ props.title }}</title>
+{% endblock title %}
+
+{% block content %}
+<section class="site-section site-section--account">
+  <header class="site-section__header">
+    <h1 class="site-section__heading">
+      Account
+    </h1>
+  </header>
+  <div>
+    <p class="def-list__section">
+      Name: <b>{{ props.account.username }}</b>
+    </p>
+    <p class="def-list__section">
+      Role:
+      <span class="acc-info__role">
+        {{ kemono_link(
+          url= role_links[props.account.role],
+          text= props.account.role
+        ) }}
+      </span>
+    </p>
+    <p class="def-list__section">
+      Joined:
+      <span>{{ props.account.created_at }}</span>
+    </p>
+    <p class="def-list__section">
+      Notifications:
+      <span>
+        {{ kemono_link(
+          url= '/account/notifications',
+          text= props.notifications_count
+        ) }}
+      </span>
+    </p>
+    <p class="def-list__section">
+      {{ kemono_link(
+        url= '/account/keys',
+        text= 'Keys'
+      ) }}
+    </p>
+  </div>
+</section>
+{% endblock content %}
