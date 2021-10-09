@@ -25,6 +25,22 @@
       <p>
         If you want to contribute content, head over to the {{ kemono_link("/importer", "import page") }}.
       </p>
+      <ul>
+        {% for paysite in g.paysite_list %}
+          <li>
+            {{ g.paysites[paysite].title }}
+          </li>
+        {% endfor %}
+      </ul>
+      <p>
+        Contributors here upload content from paywalls, and share it here for easy searching and organization.
+      </p>
+      <p>
+        To get started viewing paywalled content, either search for creators on the {{ kemono_link("/artists", "artists page")}}, or search for content on the {{ kemono_link("/posts", "posts page") }}.  
+      </p>
+      <p>
+        If you want to contribute content, head over to the {{ kemono_link("/importer", "import page") }}.
+      </p>
     </div>
     <div class="jumbo">
       <h2>Announcements</h2>
@@ -54,6 +70,5 @@
         </p>
       </div>
     </div>
-  </div>
   {% endcall %}
 {% endblock %}
