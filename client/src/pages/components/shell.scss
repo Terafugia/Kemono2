@@ -1,13 +1,13 @@
 @use "../../css/variables" as *;
 
-.footer {
+.global-footer {
   padding: 5px 20px;
   margin: 0;
   font-weight: normal;
   font-size: 14px;
   text-align: center;
 
-  .header {
+  .footer {
     list-style-type: none;
     font-weight: 700;
     font-size: 14px;
