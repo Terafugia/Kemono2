@@ -13,12 +13,6 @@
         Loading creator index... (please wait before searching)
       </span>
     </div>
-    <div class="ad-container">
-      <a href="https://cryptostresser.com/?src=kemonoparty" target="_blank">
-        <img src="/static/stresser.gif">
-      </a>
-    </div>
-    
     <form
       autocomplete="off"
       id="search-form"
@@ -70,10 +64,10 @@
     {% endif %}
     {% if results|length %}
       <div class="paginator" id="paginator-top">
+        {% include 'components/paginator.html' %}
         <div class="ad-container">
           <iframe width="300" height="250" scrolling="no" frameborder="0" src="https://a.adtng.com/get/10012822?time=1629300404636" allowtransparency="true" marginheight="0" marginwidth="0" name="spot_id_10012822"></iframe>
         </div>
-        {% include 'components/paginator.html' %}
       </div>
     {% endif %}
     {% call card_list('table') %}
