@@ -119,7 +119,7 @@ def posts():
             else:
                 attachments.append({
                     'path': attachment['path'],
-                    'name': attachment['name']
+                    'name': attachment.get('name')
                 })
 
         cursor4 = get_cursor()
@@ -156,47 +156,6 @@ def upload_post():
         props=props
     ), 200)
     response.headers['Cache-Control'] = 's-maxage=60'
-    return response
-
-# TODO: /:service/user/:id/rss
-
-@legacy.route('/<service>/user/<id>/rss')
-def user_rss(service, id):
-    cursor = get_cursor()
-    query = "SELECT * FROM posts WHERE \"user\" = %s AND service = %s "
-    params = (id, service)
-
-    query += "ORDER BY added desc "
-    query += "LIMIT 10"
-
-    cursor.execute(query, params)
-    results = cursor.fetchall()
-
-    cursor3 = get_cursor()
-    query3 = "SELECT * FROM lookup WHERE id = %s AND service = %s"
-    params3 = (id, service)
-    cursor3.execute(query3, params3)
-    results3 = cursor.fetchall()
-    name = results3[0]['name'] if len(results3) > 0 else ''
-
-    fg = FeedGenerator()
-    fg.title(name)
-    fg.description('Feed for posts from ' + name + '.')
-    fg.id(f'http://{request.headers.get("host")}/{service}/user/{id}')
-    fg.link(href=f'http://{request.headers.get("host")}/{service}/user/{id}')
-    fg.generator(generator='Kemono')
-    fg.ttl(ttl=40)
-
-    for post in results:
-        fe = fg.add_entry()
-        fe.title(post['title'])
-        fe.id(f'http://{request.headers.get("host")}/{service}/user/{id}/post/{post["id"]}')       
-        fe.link(href=f'http://{request.headers.get("host")}/{service}/user/{id}/post/{post["id"]}')
-        fe.content(content=post["content"])
-        fe.pubDate(pytz.utc.localize(post["added"]))
-
-    response = make_response(fg.atom_str(pretty=True), 200)
-    response.headers['Content-Type'] = 'application/rss+xml'
     return response
 
 @legacy.route('/discord/server/<id>')
