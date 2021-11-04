@@ -78,6 +78,7 @@ logging.getLogger('urllib3').setLevel(logging.WARNING)
 cache.init_app(app)
 database.init()
 redis.init()
+redis.init_mq()
 
 app.config['ENABLE_PASSWORD_VALIDATOR'] = True
 app.config['ENABLE_LOGIN_RATE_LIMITING'] = True
