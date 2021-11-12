@@ -31,11 +31,12 @@ services:
       - PGPASSWORD=shinonome
       - PGDATABASE=kemonodb
       - PGHOST=kemono-db
+      - REDIS_HOST=kemono-redis
+      - REDIS_PORT=6379
       - ARCHIVERHOST=kemono-archiver
       - ARCHIVERPORT=80
     volumes:
       - .:/app
-      - ./redis_map.py:/app/redis_map.py
       - frontend-assets-dev:/app/dist:ro
       - data-dev:/storage
     sysctls:
@@ -90,7 +91,6 @@ services:
     volumes:
       - ./archiver:/app
       - ./kitsune.py:/app/config.py
-      - ./redis_map.py:/app/redis_map.py
       - data-dev:/storage
     sysctls:
       net.core.somaxconn: 40000
