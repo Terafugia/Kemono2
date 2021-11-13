@@ -35,6 +35,16 @@ from src.pages.support import support
 from src.pages.importer import importer_page
 from src.pages.dmca import dmca
 
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
+
+if getenv('SENTRYDSN'):
+    sentry_sdk.init(
+        dsn=getenv('SENTRYDSN'),
+        integrations=[FlaskIntegration(), RedisIntegration()]
+    )
+
 app = Flask(
     __name__,
     static_folder='dist/static',
