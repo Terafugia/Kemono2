@@ -63,8 +63,10 @@ def deserialize_dict_list(data):
     to_return = list(map(lambda elem: deserialize_dict(elem), data))
     return to_return
 
+def scan_keys(pattern):
+    return cluster.get_local_client_for_key(pattern).scan_iter(match=pattern, count=5000)
+
 def delete_keys(pattern):
     redis = get_conn()
-    keys = redis.keys(pattern)
-    if (len(keys)):
-        redis.delete(*keys)
+    for key in scan_keys(pattern):
+        redis.delete(key)
