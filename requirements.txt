@@ -3,6 +3,7 @@ awesome-slugify==1.6.5
 bcrypt==3.2.0
 beautifulsoup4==4.9.3
 bleach==3.2.1
+blinker==1.4
 bs4==0.0.1
 certifi==2020.11.8
 cffi==1.14.5
