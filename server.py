@@ -8,6 +8,9 @@ from src.pages.random import random
 from src.pages.artists import artists
 from src.pages.legacy import legacy
 from src.pages.home import home
+from src.pages.dmca import dmca
+from src.pages.support import support
+from src.pages.help import help_app
 from src.utils.utils import url_is_for_non_logged_file_extension, render_page_data, paysites, paysite_list, freesites
 from src.lib.notification import count_new_notifications
 from src.lib.account import is_logged_in, load_account
