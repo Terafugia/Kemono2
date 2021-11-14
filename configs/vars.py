@@ -1,6 +1,6 @@
 """
-Environment variable assignments are stored there.
-No transformation allowed, therefore all variables there are strings.
+Environment variable assignment are stored there.
+No transformation allowed, therefore all variables there are string.
 """
 
 import os

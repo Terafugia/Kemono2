@@ -2,8 +2,7 @@
 
 .site-section--user {
   .no-results {
-    --card-size: #{$width-phone};
-    width: var(--card-size);
+    --card-size: $width-phone;
     padding: $size-small 0;
     margin: 0 auto;
   }
@@ -75,22 +74,22 @@
 
       & img {}
     }
-
+    
   }
 
   &__actions {
     font-size: 1.5em;
     font-weight: bold;
-    text-shadow:
-    hsl(0, 0%, 0%) 0px 0px 3px,
-    hsl(0, 0%, 0%) -1px -1px 0px,
+    text-shadow: 
+    hsl(0, 0%, 0%) 0px 0px 3px, 
+    hsl(0, 0%, 0%) -1px -1px 0px, 
     hsl(0, 0%, 0%) 1px 1px 0px;
     color: hsl(0, 0%, 100%);
     border:transparent;
 
     & > * {
       margin-right: 1em;
-
+  
       &:last-child {
         margin-right: 0;
       }
@@ -101,9 +100,9 @@
     box-sizing: border-box;
     font-weight: bold;
     color: hsl(0, 0%, 100%);
-    text-shadow:
-    hsl(0, 0%, 0%) 0px 0px 3px,
-    hsl(0, 0%, 0%) -1px -1px 0px,
+    text-shadow: 
+    hsl(0, 0%, 0%) 0px 0px 3px, 
+    hsl(0, 0%, 0%) -1px -1px 0px, 
     hsl(0, 0%, 0%) 1px 1px 0px;
     background-color: transparent;
     border:transparent;
@@ -143,9 +142,9 @@
 //   font-size: 32px;
 //   font-weight: bold;
 //   color: hsl(0, 0%, 100%);
-//   text-shadow:
-//   rgb(0, 0, 0) 0px 0px 3px,
-//   rgb(0, 0, 0) -1px -1px 0px,
+//   text-shadow: 
+//   rgb(0, 0, 0) 0px 0px 3px, 
+//   rgb(0, 0, 0) -1px -1px 0px, 
 //   rgb(0, 0, 0) 1px 1px 0px;
 //   cursor: pointer;
 //   user-select: none;
