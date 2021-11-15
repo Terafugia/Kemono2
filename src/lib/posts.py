@@ -44,9 +44,9 @@ def get_all_posts_for_query(q: str, reload=False):
     results = redis.get(key)
     if results is None or reload:
         cursor = get_cursor()
-        query = "SET LOCAL enable_indexscan = off; "
-        query += "SELECT * FROM posts WHERE to_tsvector('english', content || ' ' || title) @@ websearch_to_tsquery(%s) ORDER BY added desc"
-        params = (q,)
+        query = "SET LOCAL enable_seqscan = off; SET LOCAL statement_timeout = 10000; "
+        query += "SELECT * FROM posts WHERE title &@~ %s OR content &@~ %s ORDER BY added desc"
+        params = (q, q)
 
         cursor.execute(query, params)
         results = cursor.fetchall()
