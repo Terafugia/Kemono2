@@ -30,8 +30,9 @@ def count_all_posts_for_query(q: str, reload=False):
     count = redis.get(key)
     if count is None or reload:
         cursor = get_cursor()
-        query = "SELECT COUNT(*) FROM posts WHERE to_tsvector('english', content || ' ' || title) @@ websearch_to_tsquery(%s)"
-        cursor.execute(query, (q,))
+        query = "SET LOCAL enable_seqscan = off; SET LOCAL statement_timeout = 10000; "
+        query += "SELECT COUNT(*) FROM posts WHERE title &@~ %s OR content &@~ %s"
+        cursor.execute(query, (q, q))
         count = cursor.fetchone()
         redis.set(key, str(count['count']), ex=600)
         count = int(count['count'])
