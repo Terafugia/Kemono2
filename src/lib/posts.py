@@ -31,8 +31,8 @@ def count_all_posts_for_query(q: str, reload=False):
     if count is None or reload:
         cursor = get_cursor()
         query = "SET random_page_cost = 0.0001; SET LOCAL statement_timeout = 10000; "
-        query += "SELECT COUNT(*) FROM posts WHERE title &@~ %s OR content &@~ %s"
-        cursor.execute(query, (q, q))
+        query += "SELECT COUNT(*) FROM posts WHERE content &@~ %s"
+        cursor.execute(query, (q,))
         count = cursor.fetchone()
         redis.set(key, str(count['count']), ex=600)
         count = int(count['count'])
@@ -63,8 +63,8 @@ def get_all_posts_for_query(q: str, offset: int, reload=False):
     if results is None or reload:
         cursor = get_cursor()
         query = "SET random_page_cost = 0.0001; SET LOCAL statement_timeout = 10000; "
-        query += "SELECT * FROM posts WHERE title &@~ %s OR content &@~ %s ORDER BY added desc LIMIT 25 OFFSET %s"
-        params = (q, q, offset)
+        query += "SELECT * FROM posts WHERE content &@~ %s ORDER BY added desc LIMIT 25 OFFSET %s"
+        params = (q, offset)
 
         cursor.execute(query, params)
         results = cursor.fetchall()
