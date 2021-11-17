@@ -64,7 +64,7 @@ def get_all_posts_for_query(q: str, offset: int, reload=False):
         cursor = get_cursor()
         query = "SET random_page_cost = 0.0001; SET LOCAL statement_timeout = 10000; "
         query += "SELECT * FROM posts WHERE title &@~ %s OR content &@~ %s ORDER BY added desc LIMIT 25 OFFSET %s"
-        params = (q, offset)
+        params = (q, q, offset)
 
         cursor.execute(query, params)
         results = cursor.fetchall()
