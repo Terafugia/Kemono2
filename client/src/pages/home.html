@@ -4,32 +4,41 @@
 {% from "components/links.html" import kemono_link %}
 
 {% block content %}
-  {% call site.section("home", title="Welcome to Kemono!") %}
+  {% call site.section("home") %}
     <div class="jumbo" style="background-color: #ffc107">
       <p style="color: #000">
         Some files and images may appear to be missing from the site due to the ongoing dedupe. Don't worry - all data is safe, and things should return to normal operation within a week or two.
       </p>
     </div>
-    <div class="jumbo">
-      <p>
-        <strong>Kemono</strong> is a public archiver for:
-      </p>
-      <ul>
-        {% for paysite in g.paysite_list %}
-          <li>
-            {{ g.paysites[paysite].title }}
-          </li>
-        {% endfor %}
-      </ul>
-      <p>
-        Contributors here upload content from paywalls, and share it here for easy searching and organization.
-      </p>
-      <p>
-        To get started viewing paywalled content, either search for creators on the {{ kemono_link("/artists", "artists page")}}, or search for content on the {{ kemono_link("/posts", "posts page") }}.  
-      </p>
-      <p>
-        If you want to contribute content, head over to the {{ kemono_link("/importer", "import page") }}.
-      </p>
+    <div class="jumbo-welcome">
+      <div class="jumbo-welcome-background">
+        <img src="https://kemono.party/data/0f/98/0f98f05f43c711d6119a32b880dac4cd8e5e30f495430d5facb543e0d2aea1c3.gif?f=samezu0326F9.gif">
+      </div>
+      <div class="jumbo-welcome-mascot">
+        <div class="jumbo-welcome-mascot-tan"></div>
+      </div>
+      <div class="jumbo-welcome-description">
+        <div class="jumbo-welcome-description-header">
+          <img src="/static/klogo.png" width="50px" height="50px">
+        </div>
+        <p>
+          <strong>Kemono</strong> is a public archiver for:
+        </p>
+        <ul>
+          {% for paysite in g.paysite_list %}
+            <li>
+              {{ g.paysites[paysite].title }}
+            </li>
+          {% endfor %}
+        </ul>
+        <p>
+          Contributors here upload content, and share it here for easy searching, organization. To get started viewing paywalled content, either search for creators on the {{ kemono_link("/artists", "artists page")}}, or search for content on the {{ kemono_link("/posts", "posts page") }}. If you want to contribute content, head over to the {{ kemono_link("/importer", "import page") }}.
+        </p>
+        <div class="jumbo-welcome-credits">
+          <small>Background by <a href="/patreon/user/4045578">1041uuu</a></small><br>
+          <small>Mascot commission fulfilled by <a href="https://twitter.com/ArkanmanDankan" target="_blank">Arkman;</a> coordinated by Crackhead McGee</small>
+        </div>
+      </div>
     </div>
     <div class="jumbo">
       <h2>Announcements</h2>
