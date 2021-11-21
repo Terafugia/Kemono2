@@ -1,4 +1,5 @@
 import json
+import datetime
 from src.internals.cache.redis import get_conn, serialize_dict_list, deserialize_dict_list
 from src.utils.utils import get_import_id
 from flask import Blueprint, request, make_response, render_template, current_app, g, session
@@ -154,6 +155,10 @@ def importer_submit():
             contributor_id=session.get("account_id")
         )
         redis.set('imports:' + import_id, json.dumps(data))
+
+        msg = 'Successfully added your import to the queue. Waiting...'
+        msg = f'[{import_id}]@{datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S")}: {msg}'
+        redis.rpush(f'importer_logs:{import_id}', msg)
 
         props = SuccessProps(
             currentPage='import',
