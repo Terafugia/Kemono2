@@ -74,7 +74,8 @@ def get_all_dms_by_query(q: str, offset: int, limit: int, reload: bool = False) 
     dms = redis.get(key)
     if dms is None or reload:
         cursor = get_cursor()
-        query = 'SELECT * FROM dms WHERE to_tsvector(\'english\', content) @@ websearch_to_tsquery(%s) OFFSET %s LIMIT %s'
+        query = 'SET random_page_cost = 0.0001; SET LOCAL statement_timeout = 10000; '
+        query += 'SELECT * FROM dms WHERE content &@~ %s ORDER BY added desc OFFSET %s LIMIT %s'
         cursor.execute(query, (q, offset, limit))
         dms = cursor.fetchall()
         redis.set(key, serialize_dms(dms), ex = 600)
@@ -89,7 +90,8 @@ def get_all_dms_by_query_count(q: str, reload: bool = False) -> int:
     count = redis.get(key)
     if count is None or reload:
         cursor = get_cursor()
-        query = 'SELECT COUNT(*) FROM dms WHERE to_tsvector(\'english\', content) @@ websearch_to_tsquery(%s)'
+        query = 'SET random_page_cost = 0.0001; SET LOCAL statement_timeout = 10000; '
+        query += 'SELECT * FROM dms WHERE content &@~ %s'
         cursor.execute(query, (q,))
         count = int(cursor.fetchone()['count'])
         redis.set(key, str(count), ex = 600)

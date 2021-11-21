@@ -15,7 +15,7 @@ def get_dms():
     
     offset = parse_int(request.args.get('o'), 0)
     query = request.args.get('q')
-    limit = limit_int(int(request.args.get('limit') or 25), 50)
+    limit = 25
     
     if query is None:
         (dms, total_count) = get_dm_page(offset, limit)
