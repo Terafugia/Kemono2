@@ -1,4 +1,5 @@
 import json
+# @REVIEW: rewrite into `import from` syntax
 import datetime
 from src.internals.cache.redis import get_conn, serialize_dict_list, deserialize_dict_list
 from src.utils.utils import get_import_id
@@ -156,6 +157,9 @@ def importer_submit():
         )
         redis.set('imports:' + import_id, json.dumps(data))
 
+        # @REVIEW: These are different variables and so is the timestamp.
+        # Why does a random endpoint add logs to the import?
+        # It's a job of the importer manager.
         msg = 'Successfully added your import to the queue. Waiting...'
         msg = f'[{import_id}]@{datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S")}: {msg}'
         redis.rpush(f'importer_logs:{import_id}', msg)
