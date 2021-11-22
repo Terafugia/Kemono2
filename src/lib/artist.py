@@ -9,6 +9,7 @@ import copy
 import datetime
 
 artists_faved_lock = Lock()
+recent_artists_faved_lock = Lock()
 
 def get_top_artists_by_faves(offset, count, reload = False):
     redis = get_conn()
@@ -85,6 +86,7 @@ def get_top_artists_by_recent_faves(offset, count, reload = False):
 
 def get_count_of_artists_recently_faved(reload = False):
     redis = get_conn()
+    recent_artists_faved_lock.acquire()
     key = 'artists_recently_faved_count'
     count = redis.get(key)
     if count is None or reload:
@@ -104,6 +106,7 @@ def get_count_of_artists_recently_faved(reload = False):
         redis.set(key, count, ex = 3600)
     else:
         count = int(count)
+    recent_artists_faved_lock.release()
     return count
 
 def get_random_artist_keys(count, reload = False):
