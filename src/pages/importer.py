@@ -153,10 +153,10 @@ def importer_submit():
         msg = f'[{import_id}]@{datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S")}: {msg}'
         redis.rpush(f'importer_logs:{import_id}', msg)
 
-        props = SuccessProps(
-            currentPage='import',
-            redirect=f'/importer/status/{import_id}{ "?dms=1" if request.form.get("save_dms") else "" }'
-        )
+        props = {
+            'currentPage': 'import',
+            'redirect': f'/importer/status/{import_id}{ "?dms=1" if request.form.get("save_dms") else "" }'
+        }
 
         return make_response(render_template(
             'success.html',
