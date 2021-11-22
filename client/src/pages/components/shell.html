@@ -141,6 +141,12 @@
           <li><a href="/help/bans">[Bans]</a></li> #}
         </ul>
       {% endif %}
+      {% if props.currentPage == 'import' %}
+        <div class="subheader">
+          <img src="https://kemono.party/status/importer/running"></img>
+          <img src="https://kemono.party/status/importer/queued"></img>
+        </div>
+      {% endif %}
       {% include 'components/flash_messages.html' %}
     </header>
 
