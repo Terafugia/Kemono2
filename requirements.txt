@@ -31,7 +31,7 @@ mccabe==0.6.1
 natsort==7.1.1
 nodeenv==1.6.0
 packaging==20.7
-Pillow==8.0.1
+Pillow==9.3.0
 platformdirs==2.4.0
 pre-commit==2.15.0
 psycopg2==2.8.6
