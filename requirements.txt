@@ -46,7 +46,7 @@ python-redis-rate-limit==0.0.7
 python-resumable==0.1.2
 pytz==2021.1
 PyYAML==6.0
-redis==3.4.1
+redis==4.5.3
 rb==1.9.0
 regex==2020.11.13
 requests==2.25.0
